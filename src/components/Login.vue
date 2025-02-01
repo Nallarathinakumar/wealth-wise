@@ -42,6 +42,8 @@ const login = () => {
     if (username.value === "demo" && password.value === "password") {
         localStorage.setItem("isLoggedIn", "true");
         router.push("/");
+        // Update the isLoggedIn state in the root component
+        isLoggedIn.value = true;
     } else {
         errorMessage.value = "Invalid username or password";
     }
