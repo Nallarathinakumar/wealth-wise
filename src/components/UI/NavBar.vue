@@ -3,6 +3,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <router-link to="/" class="text-lg font-bold">Wealth-Wise</router-link>
             <ul v-if="isLoggedIn" class="flex space-x-4">
+            <!-- <ul v-if="isLoggedIn" class="flex space-x-4"> hand;e login issue -->
                 <li>
                     <router-link to="/" class="hover:text-primary-hover">Dashboard</router-link>
                 </li>
