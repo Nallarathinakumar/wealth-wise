@@ -1,3 +1,4 @@
+// src/mockData.js
 export default {
     transactions: [
         { date: '2023-10-26', description: 'Grocery Store', category: 'Food', amount: -50 },
@@ -6,12 +7,18 @@ export default {
         // ... more transactions
     ],
     goals: [
-        { name: 'Emergency Fund', totalAmount: 1500, currentAmount: 675 },
+        {
+            name: "Emergency Fund",
+            totalAmount: 1500,
+            currentAmount: 675,
+            timeframe: 6, // Add timeframe (in months)
+            monthlySaving: 0, // Initially 0, will be calculated
+        },
         // ... more goals
     ],
     spendingTrend: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        data: [120, 85, 150, 90, 110, 75, 130],
+        data: [120, 85, 150, 90, 110, 75, 130], // Example spending data
     },
     aiInsights: [
         {

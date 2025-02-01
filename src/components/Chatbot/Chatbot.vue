@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref, onUpdated, nextTick } from "vue";
+import { ref, onUpdated, nextTick, reactive } from "vue";
 import mockData from "@/mockData";
 
 const messages = ref([]);
@@ -46,7 +46,7 @@ const sendMessage = () => {
     setTimeout(() => {
         messages.value.push({
             id: messages.value.length + 1,
-            text: getAiResponse(newMessage.value), // Get response from mock data or algorithm
+            text: getAiResponse(newMessage.value),
             sender: "ai",
         });
     }, 500);
@@ -54,19 +54,48 @@ const sendMessage = () => {
     newMessage.value = "";
 };
 
-// Simple response logic for demo (expand with more complex logic if needed)
 const getAiResponse = (userMessage) => {
     const lowerCaseMessage = userMessage.toLowerCase();
 
+    // Accessing transactions and goals from mockData
+    const transactions = mockData.transactions;
+    const goals = mockData.goals;
+
+    // Basic analysis and response generation
     if (lowerCaseMessage.includes("spending")) {
-        return "Your spending is looking good this month. Keep it up!";
+        return analyzeSpending(transactions);
     } else if (lowerCaseMessage.includes("goal")) {
-        return "You are making good progress towards your Emergency Fund goal.";
+        return analyzeGoals(goals);
     } else if (lowerCaseMessage.includes("debt")) {
         return "Focus on paying down high-interest debt first.";
     } else {
         return "I'm not sure I understand. Can you rephrase your question?";
     }
+};
+
+// Function to analyze spending
+const analyzeSpending = (transactions) => {
+    let totalSpending = 0;
+    transactions.forEach((transaction) => {
+        if (transaction.amount < 0) {
+            totalSpending += Math.abs(transaction.amount);
+        }
+    });
+
+    return `Your total spending is $${totalSpending}. You might want to review your expenses.`;
+};
+
+// Function to analyze goals
+const analyzeGoals = (goals) => {
+    if (goals.length === 0) {
+        return "You have not set any financial goals yet.";
+    }
+
+    const goal = goals[0]; // Focus on the first goal for simplicity
+    const progress = (goal.currentAmount / goal.totalAmount) * 100;
+
+    return `You are ${progress.toFixed(2)}% on your way to achieving your ${goal.name
+        } goal.`;
 };
 
 // Scroll to bottom when new messages are added

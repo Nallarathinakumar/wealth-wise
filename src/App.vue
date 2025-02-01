@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, reactive } from "vue";
 import { useRoute } from "vue-router";
 import NavBar from "./components/UI/NavBar.vue";
 

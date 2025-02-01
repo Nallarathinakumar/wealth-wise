@@ -10,7 +10,7 @@ const routes = [
     { path: '/transactions', component: TransactionUploader, meta: { requiresAuth: true } }, // Protected route
     { path: '/goals', component: Goals, meta: { requiresAuth: true } }, // Protected route
     { path: '/chatbot', component: Chatbot, meta: { requiresAuth: true } }, // Protected route
-    { path: '/login', component: Login },
+    { path: '/login', component: Login, name: 'Login' },
 ];
 
 const router = createRouter({
